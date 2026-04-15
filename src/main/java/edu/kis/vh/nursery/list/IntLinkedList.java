@@ -2,8 +2,8 @@ package edu.kis.vh.nursery.list;
 
 public class IntLinkedList {
 
-    Node lastNode;
-    int index;
+    private Node lastNode;
+    private int index;
 
     public void push(int i) {
         if (lastNode == null)
