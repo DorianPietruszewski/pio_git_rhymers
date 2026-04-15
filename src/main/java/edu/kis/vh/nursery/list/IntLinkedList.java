@@ -9,9 +9,9 @@ public class IntLinkedList {
         if (lastNode == null)
             lastNode = new Node(i);
         else {
-            lastNode.next = new Node(i);
-            lastNode.next.prev = lastNode;
-            lastNode = lastNode.next;
+            lastNode.setNext(new Node(i));
+            lastNode.getNext().setPrev(lastNode);
+            lastNode = lastNode.getNext();
         }
     }
 
@@ -26,14 +26,14 @@ public class IntLinkedList {
     public int top() {
         if (isEmpty())
             return -1;
-        return lastNode.value;
+        return lastNode.getValue();
     }
 
     public int pop() {
         if (isEmpty())
             return -1;
-        int ret = lastNode.value;
-        lastNode = lastNode.prev;
+        int ret = lastNode.getValue();
+        lastNode = lastNode.getPrev();
         return ret;
     }
 
