@@ -4,6 +4,7 @@ public class IntLinkedList {
 
     private static final int EMPTY = -1;
     private Node lastNode;
+    // TODO: remove unused field 'index' or implement index-based behavior.
     private int index;
 
     public void push(int i) {

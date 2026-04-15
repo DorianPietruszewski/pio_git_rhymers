@@ -5,6 +5,7 @@ public class FifoRhymer extends DefaultCountingOutRhymer {
     private final DefaultCountingOutRhymer temp = new DefaultCountingOutRhymer();
 
     @Override
+    // TODO: refactor to avoid moving all elements on every countOut (current complexity is O(n)).
     public int countOut() {
         while (!callCheck())
             temp.countIn(super.countOut());
