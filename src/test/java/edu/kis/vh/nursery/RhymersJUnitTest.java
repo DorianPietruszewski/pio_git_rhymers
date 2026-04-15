@@ -3,11 +3,13 @@ package edu.kis.vh.nursery;
 import org.junit.Assert;
 import org.junit.Test;
 
+// Testy uruchomione pomyslnie
+
 public class RhymersJUnitTest {
 
     @Test
     public void testCountIn() {
-        defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
         int testValue = 4;
         rhymer.countIn(testValue);
 
@@ -17,7 +19,7 @@ public class RhymersJUnitTest {
 
     @Test
     public void testCallCheck() {
-        defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
         boolean result = rhymer.callCheck();
         Assert.assertEquals(true, result);
 
@@ -29,7 +31,7 @@ public class RhymersJUnitTest {
 
     @Test
     public void testIsFull() {
-        defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
         final int STACK_CAPACITY = 12;
         for (int i = 0; i < STACK_CAPACITY; i++) {
             boolean result = rhymer.isFull();
@@ -43,7 +45,7 @@ public class RhymersJUnitTest {
 
     @Test
     public void testPeekaboo() {
-        defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
         final int EMPTY_STACK_VALUE = -1;
 
         int result = rhymer.peekaboo();
@@ -60,7 +62,7 @@ public class RhymersJUnitTest {
 
     @Test
     public void testCountOut() {
-        defaultCountingOutRhymer rhymer = new defaultCountingOutRhymer();
+        DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
         final int EMPTY_STACK_VALUE = -1;
 
         int result = rhymer.countOut();
@@ -73,6 +75,33 @@ public class RhymersJUnitTest {
         Assert.assertEquals(testValue, result);
         result = rhymer.countOut();
         Assert.assertEquals(EMPTY_STACK_VALUE, result);
+    }
+
+    @Test
+    public void testFifoRhymerBoundaryAndEmptyCases() {
+        FifoRhymer rhymer = new FifoRhymer();
+        final int EMPTY_VALUE = -1;
+        final int CAPACITY = 12;
+        final int OVERFLOW_TEST_VALUE = 999;
+        final int REUSE_TEST_VALUE = 42;
+
+        Assert.assertEquals(EMPTY_VALUE, rhymer.countOut());
+
+        for (int i = 1; i <= CAPACITY; i++) {
+            rhymer.countIn(i);
+        }
+
+        rhymer.countIn(OVERFLOW_TEST_VALUE);
+
+        for (int i = 1; i <= CAPACITY; i++) {
+            Assert.assertEquals(i, rhymer.countOut());
+        }
+
+        Assert.assertEquals(EMPTY_VALUE, rhymer.countOut());
+
+        rhymer.countIn(REUSE_TEST_VALUE);
+        Assert.assertEquals(REUSE_TEST_VALUE, rhymer.countOut());
+        Assert.assertEquals(EMPTY_VALUE, rhymer.countOut());
     }
 
 }
