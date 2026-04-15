@@ -77,4 +77,31 @@ public class RhymersJUnitTest {
         Assert.assertEquals(EMPTY_STACK_VALUE, result);
     }
 
+    @Test
+    public void testFifoRhymerBoundaryAndEmptyCases() {
+        FifoRhymer rhymer = new FifoRhymer();
+        final int EMPTY_VALUE = -1;
+        final int CAPACITY = 12;
+        final int OVERFLOW_TEST_VALUE = 999;
+        final int REUSE_TEST_VALUE = 42;
+
+        Assert.assertEquals(EMPTY_VALUE, rhymer.countOut());
+
+        for (int i = 1; i <= CAPACITY; i++) {
+            rhymer.countIn(i);
+        }
+
+        rhymer.countIn(OVERFLOW_TEST_VALUE);
+
+        for (int i = 1; i <= CAPACITY; i++) {
+            Assert.assertEquals(i, rhymer.countOut());
+        }
+
+        Assert.assertEquals(EMPTY_VALUE, rhymer.countOut());
+
+        rhymer.countIn(REUSE_TEST_VALUE);
+        Assert.assertEquals(REUSE_TEST_VALUE, rhymer.countOut());
+        Assert.assertEquals(EMPTY_VALUE, rhymer.countOut());
+    }
+
 }
